@@ -1,16 +1,28 @@
 
 var cityname = document.querySelector("#cityname");
 var btn = document.querySelector(".btn");
+var divdata = document.querySelector("#savecity");
+var index=1;
+ 
+while(JSON.parse(localStorage.getItem("index"+index))!== null)
+{
+  var newbtn = document.createElement("button");
 
+  newbtn.setAttribute("class","btn");
+  newbtn.setAttribute("id","index"+index);
+  newbtn.textContent= JSON.parse(localStorage.getItem("index"+index));
 
+  divdata.appendChild(newbtn);
 
+  index++;
+}
 
 //search button 
 btn.addEventListener("click",function(event){
   event.preventDefault();
   startnewsearch();
   var city= cityname.value;
-  
+  savecityname(city);
   getApiData(city);
   
 });
@@ -40,9 +52,9 @@ function getApiData(city)
               var forecast = document.querySelector("#Forecast-"+ (i+2));
               var text2= document.createElement("p");
 
-              var da= JSON.stringify(data.list[i*8].main.humidity);
-              var da2= JSON.stringify(data.list[i*8].main.temp);
-              var da3= JSON.stringify(data.list[i*8].wind.speed);
+              var da= data.list[i*8].main.humidity;
+              var da2= data.list[i*8].main.temp;
+              var da3= data.list[i*8].wind.speed;
               var da5= dayjs(data.list[i*8].dt_txt).format('DD/MM/YYYY');  //JSON.stringify(data.list[i-1].dt_txt);
 
               text2.innerHTML = da5 + "<img src=http://openweathermap.org/img/w/" + data.list[i*8].weather[0].icon +".png>"
@@ -86,10 +98,35 @@ function startnewsearch()
   
 }
 
-function savecityname()
+function savecityname(city)
 {
-  
+ 
+  localStorage.setItem("index"+index, JSON.stringify(city));
+
+  var newbtn = document.createElement("button");
+
+  newbtn.setAttribute("class","btn")
+  newbtn.setAttribute("id","index"+index);
+  newbtn.textContent= city;
+
+  divdata.appendChild(newbtn);
+
+  index++;
 }
+
+
+divdata.addEventListener("click", function(event){
+  startnewsearch();
+  var element = event.target;
+
+  if(element.matches("button")===true) 
+  {
+    var resetcity = JSON.parse(localStorage.getItem(element.id))
+    getApiData(resetcity);
+
+  }
+  
+});
 
 
 
