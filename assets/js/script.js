@@ -1,9 +1,3 @@
-//https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-//apikey: a9f48eaca2ef1bc28989582adf1daa56
-//http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-//http://api.openweathermap.org/geo/1.0/reverse?lat={lat}&lon={lon}&limit={limit}&appid={API key}
-//http://api.openweathermap.org/geo/1.0/reverse?lat=51.5098&lon=-0.1180&limit=5&appid={API key}
-//http://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
 var cityname = document.querySelector("#cityname");
 var btn = document.querySelector(".btn");
@@ -11,7 +5,7 @@ var btn = document.querySelector(".btn");
 
 
 
-
+//search button 
 btn.addEventListener("click",function(event){
   event.preventDefault();
   startnewsearch();
@@ -21,10 +15,9 @@ btn.addEventListener("click",function(event){
   
 });
 
-
+//git weather data api from openweathermap 
 function getApiData(city)
 {
-
 
   var requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city +'&appid=a9f48eaca2ef1bc28989582adf1daa56';
  
@@ -46,8 +39,6 @@ function getApiData(city)
 
             for(var i=0;i<=5;i++)
             {
-              
-
               var forecast = document.querySelector("#Forecast-"+ (i+2));
               var text2= document.createElement("p");
 
@@ -82,6 +73,8 @@ function getApiData(city)
   
 }
 
+
+//clear data and start new one
 function startnewsearch()
 {
   for(var i=1;i<=6;i++)
