@@ -60,6 +60,7 @@
   
   p {
     font-size: 1.2rem;
+    white-space: pre;
   }
   
   .btn {
@@ -100,7 +101,7 @@
     height: 250px;
     border: 3px solid black;
     border-radius: 20px;
-    background-color: gray;
+    background-color: #a3b1f7;
     margin-right: 10px;
 
   }
