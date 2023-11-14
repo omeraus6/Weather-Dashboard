@@ -26,7 +26,6 @@ function getApiData(city)
     return response.json();
   })
   .then(function (data) {
-    console.log(data);
 
     var requestUrl2 = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + data[0].lat +'&lon=' + data[0].lon +
                      '&appid=a9f48eaca2ef1bc28989582adf1daa56&units=imperial';
@@ -35,7 +34,6 @@ function getApiData(city)
              return response.json();
          })
        .then(function (data) {
-            console.log(data);
 
             for(var i=0;i<=5;i++)
             {
