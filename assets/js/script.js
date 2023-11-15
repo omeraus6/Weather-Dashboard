@@ -57,7 +57,7 @@ function getApiData(city)
               var da3= data.list[i*8].wind.speed;
               var da5= dayjs(data.list[i*8].dt_txt).format('DD/MM/YYYY');  //JSON.stringify(data.list[i-1].dt_txt);
 
-              text2.innerHTML = da5 + "<img src=http://openweathermap.org/img/w/" + data.list[i*8].weather[0].icon +".png>"
+              text2.innerHTML = da5 + "<img src=https://openweathermap.org/img/w/" + data.list[i*8].weather[0].icon +".png>"
                        +"\r\nhumidity: " + da +"\r\ntemp: " 
                       + da2 + "\r\nspeed: " + da3;
               text2.style= "margin: 10px ; font-size: 20px; color: black"; 
@@ -67,7 +67,7 @@ function getApiData(city)
                 var forecast1 = document.querySelector(".first-day");
                 var text= document.createElement("p");
                 var da4= data.city.name;
-                text.innerHTML = da4 + " " + da5 + "<img src=http://openweathermap.org/img/w/" + data.list[0].weather[0].icon 
+                text.innerHTML = da4 + " " + da5 + "<img src=https://openweathermap.org/img/w/" + data.list[0].weather[0].icon 
                        +".png>" +"\r\nhumidity: " + da +"\r\ntemp: " + da2 + "\r\nspeed: " + da3; 
                 text.style= "margin: 10px ; font-size: 20px; color: black"; 
                 forecast1.appendChild(text);
