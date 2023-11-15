@@ -31,7 +31,7 @@ btn.addEventListener("click",function(event){
 function getApiData(city)
 {
 
-  var requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city +'&appid=a9f48eaca2ef1bc28989582adf1daa56';
+  var requestUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city +'&appid=a9f48eaca2ef1bc28989582adf1daa56';
  
   fetch(requestUrl)
     .then(function (response) {
@@ -39,7 +39,7 @@ function getApiData(city)
   })
   .then(function (data) {
 
-    var requestUrl2 = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + data[0].lat +'&lon=' + data[0].lon +
+    var requestUrl2 = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + data[0].lat +'&lon=' + data[0].lon +
                      '&appid=a9f48eaca2ef1bc28989582adf1daa56&units=imperial';
     fetch(requestUrl2)
        .then(function (response) {
