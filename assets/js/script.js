@@ -2,6 +2,8 @@
 var cityname = document.querySelector("#cityname");
 var btn = document.querySelector(".btn");
 var divdata = document.querySelector("#savecity");
+var clearbtn = document.querySelector(".btn2");
+
 var index=1;
  
 while(JSON.parse(localStorage.getItem("index"+index))!== null)
@@ -35,15 +37,16 @@ function getApiData(city)
  
   fetch(requestUrl)
     .then(function (response) {
-    return response.json();
+       return response.json();
   })
   .then(function (data) {
 
     var requestUrl2 = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + data[0].lat +'&lon=' + data[0].lon +
                      '&appid=a9f48eaca2ef1bc28989582adf1daa56&units=imperial';
+
     fetch(requestUrl2)
-       .then(function (response) {
-             return response.json();
+       .then(function (response) {  
+           return response.json();
          })
        .then(function (data) {
 
@@ -58,8 +61,8 @@ function getApiData(city)
               var da5= dayjs(data.list[i*8].dt_txt).format('DD/MM/YYYY');  //JSON.stringify(data.list[i-1].dt_txt);
 
               text2.innerHTML = da5 + "<img src=https://openweathermap.org/img/w/" + data.list[i*8].weather[0].icon +".png>"
-                       +"\r\nhumidity: " + da +"\r\ntemp: " 
-                      + da2 + "\r\nspeed: " + da3;
+                       +"\r\nHumidity: " + da +" %\r\nTemp: " 
+                      + da2 + " F\r\nSpeed: " + da3 + " MPH";
               text2.style= "margin: 10px ; font-size: 20px; color: black"; 
 
               if(i==0)
@@ -68,7 +71,7 @@ function getApiData(city)
                 var text= document.createElement("p");
                 var da4= data.city.name;
                 text.innerHTML = da4 + " " + da5 + "<img src=https://openweathermap.org/img/w/" + data.list[0].weather[0].icon 
-                       +".png>" +"\r\nhumidity: " + da +"\r\ntemp: " + da2 + "\r\nspeed: " + da3; 
+                       +".png>" +"\r\nHumidity: " + da +" %\r\nTemp: " + da2 + " F\r\nSpeed: " + da3 + " MPH"; 
                 text.style= "margin: 10px ; font-size: 20px; color: black"; 
                 forecast1.appendChild(text);
               }
@@ -78,7 +81,6 @@ function getApiData(city)
 
             }
          });
-
   });
   
 }
@@ -100,6 +102,15 @@ function startnewsearch()
 
 function savecityname(city)
 {
+
+  for(var i=1;i<=index;i++)
+  {
+    if(JSON.parse(localStorage.getItem("index"+i)) == city)
+    {
+      return;
+    }
+  }
+ 
  
   localStorage.setItem("index"+index, JSON.stringify(city));
 
@@ -128,7 +139,16 @@ divdata.addEventListener("click", function(event){
   
 });
 
+clearbtn.addEventListener("click", function(event){
+  //startnewsearch();
+  var element = event.target;
 
+  window.localStorage.clear();
+  window.location.reload();
+
+  
+  
+});
 
  
 
